@@ -14,17 +14,28 @@ from pathlib import Path
 import argparse
 import sys
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+try:
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import OneHotEncoder
+    from sklearn.compose import ColumnTransformer
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import LinearRegression
+    from sklearn.ensemble import RandomForestRegressor
+    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+except ModuleNotFoundError as exc:
+    missing_module = exc.name or "a required dependency"
+    print(
+        f"Missing dependency: {missing_module}. "
+        "Install project requirements with:\n"
+        "python -m pip install -r requirements.txt\n"
+        "Then rerun the app.",
+        file=sys.stderr,
+    )
+    raise SystemExit(1) from exc
 
 plt.rcParams["figure.dpi"] = 110
 sns.set_style("whitegrid")
